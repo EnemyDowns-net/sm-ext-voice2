@@ -14,7 +14,7 @@ on:
 
 jobs:
   install-protobuf:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       PROTOBUF_REF: 'v2.5.0'
       # Before Counter strike 2 changes
@@ -35,6 +35,9 @@ jobs:
           ref: ${{ env.PROTOBUF_REF }}
           path: protobuf
           submodules: recursive
+          
+      - name: Install 32-bit toolchain
+        run: sudo apt-get update && sudo apt-get install -y gcc-multilib g++-multilib
 
       - name: Install protobuf
         shell: bash
